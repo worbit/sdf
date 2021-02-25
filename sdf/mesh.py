@@ -13,6 +13,13 @@ WORKERS = multiprocessing.cpu_count()
 SAMPLES = 2 ** 22
 BATCH_SIZE = 32
 
+# wip, doesn't work yet
+def mc_original(f, level=0):
+    x,y,z = np.ogrid[-5:5:64j, -5:5:64j, -5:5:64j]
+    volume = f([x,y,z])
+    verts, faces, _, _ = measure.marching_cubes(volume, level)
+    return verts, faces
+
 def _marching_cubes(volume, level=0):
     verts, faces, _, _ = measure.marching_cubes(volume, level)
     return verts[faces].reshape((-1, 3))

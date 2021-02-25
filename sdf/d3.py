@@ -323,6 +323,42 @@ def icosahedron(r):
         return _max(_max(_max(a, b), c) - x, d) * r
     return f
 
+# Triply Periodic Minimal Surfaces (TPMS)
+
+@sdf3
+def gyroid(w):
+    def f(p):
+        d = w / np.pi
+        x = p[:,0] / d
+        y = p[:,1] / d
+        z = p[:,2] / d
+        return np.sin(x) * np.cos(y) + np.sin(y) * np.cos(z) + np.sin(z) * np.cos(x)
+    return f
+
+@sdf3
+def schwartz_p(w):
+    def f(p):
+        d = w / np.pi
+        x = p[:,0] / d
+        y = p[:,1] / d
+        z = p[:,2] / d
+        return np.cos(x) + np.cos(y) + np.cos(z)
+    return f
+
+@sdf3
+def diamond(w):
+    def f(p):
+        d = w / np.pi
+        x = p[:,0] / d
+        y = p[:,1] / d
+        z = p[:,2] / d
+        return (
+            np.sin(x) * np.sin(y) * np.sin(z) +
+            np.sin(x) * np.cos(y) * np.cos(z) +
+            np.cos(x) * np.sin(y) * np.cos(z) +
+            np.cos(x) * np.cos(y) * np.sin(z))
+    return f
+
 # Positioning
 
 @op3
@@ -529,3 +565,7 @@ dilate = op3(dn.dilate)
 erode = op3(dn.erode)
 shell = op3(dn.shell)
 repeat = op3(dn.repeat)
+
+addition = op3(dn.addition)
+multiplication = op3(dn.multiplication)
+shell_mb = op3(dn.shell_mb)

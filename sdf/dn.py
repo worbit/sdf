@@ -59,6 +59,16 @@ def blend(a, *bs, k=0.5):
         return d1
     return f
 
+def addition(a, b):
+    def f(p):
+        return a(p) + b(p)
+    return f
+
+def multiplication(a, b):
+    def f(p):
+        return a(p) * b(p)
+    return f
+
 def negate(other):
     def f(p):
         return -other(p)
@@ -77,6 +87,15 @@ def erode(other, r):
 def shell(other, thickness):
     def f(p):
         return np.abs(other(p)) - thickness / 2
+    return f
+
+def shell_mb(other, thickness, side=0.5):
+    # side parameter:
+    # 0: offset to the outside
+    # 1: offset to the inside
+    # 0.5: offset half-half to both sides
+    def f(p):
+        return np.abs(other(p) + (side-0.5) * thickness) - thickness / 2
     return f
 
 def repeat(other, spacing, count=None, padding=0):
