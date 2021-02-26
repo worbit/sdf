@@ -566,6 +566,9 @@ erode = op3(dn.erode)
 shell = op3(dn.shell)
 repeat = op3(dn.repeat)
 
+# worbit additions
+
 addition = op3(dn.addition)
 multiplication = op3(dn.multiplication)
+division = op3(dn.division)
 shell_mb = op3(dn.shell_mb)

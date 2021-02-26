@@ -69,6 +69,11 @@ def multiplication(a, b):
         return a(p) * b(p)
     return f
 
+def division(a, b):
+    def f(p):
+        return a(p) / b(p)
+    return f
+
 def negate(other):
     def f(p):
         return -other(p)

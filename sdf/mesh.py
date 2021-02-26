@@ -15,8 +15,11 @@ BATCH_SIZE = 32
 
 # wip, doesn't work yet
 def mc_original(f, level=0):
+    # create grid of points
     x,y,z = np.ogrid[-5:5:64j, -5:5:64j, -5:5:64j]
+    # evaluate distance for all the points
     volume = f([x,y,z])
+    # generate MC mesh
     verts, faces, _, _ = measure.marching_cubes(volume, level)
     return verts, faces
 
