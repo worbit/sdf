@@ -59,6 +59,24 @@ def blend(a, *bs, k=0.5):
         return d1
     return f
 
+def morph(a, b, c, d):
+    def f(p):
+        da = a(p)
+        db = b(p)
+        dc = c(p)
+        t = dc / d + 0.5
+        res = np.where(dc<-d/2, da, np.where(dc>d/2, db, (1 - t) * da + t * db))
+        return res
+        # if dc < -d/2:
+        #     return da
+        # elif dc > d/2:
+        #     return db
+        # else:
+        #     # enable ease types, just linear for now
+        #     t = dc / d + 0.5
+        #     return (1 - t) * da + t * db
+    return f
+
 def addition(a, b):
     def f(p):
         return a(p) + b(p)
