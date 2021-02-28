@@ -64,6 +64,7 @@ def morph(a, b, c, d):
         da = a(p)
         db = b(p)
         dc = c(p)
+        # creates error
         t = dc / d + 0.5
         res = np.where(dc<-d/2, da, np.where(dc>d/2, db, (1 - t) * da + t * db))
         return res

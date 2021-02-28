@@ -91,6 +91,7 @@ _max = np.maximum
 @sdf3
 def sphere(radius=1, center=ORIGIN):
     def f(p):
+        #print(type(p), p.shape)
         return _length(p - center) - radius
     return f
 

@@ -15,12 +15,25 @@ BATCH_SIZE = 32
 
 # wip, doesn't work yet
 def mc_original(f, level=0):
-    # create grid of points
-    x,y,z = np.ogrid[-5:5:64j, -5:5:64j, -5:5:64j]
-    # evaluate distance for all the points
-    volume = f([x,y,z])
-    # generate MC mesh
-    verts, faces, _, _ = measure.marching_cubes(volume, level)
+    nx,ny,nz = 50,50,50
+    xi,xa = -1,1
+    yi,ya = -1,1
+    zi,za = -1,1
+
+    x = np.linspace(xi,xa,nx)
+    y = np.linspace(yi,ya,ny)
+    z = np.linspace(zi,za,nz)
+
+    xx,yy,zz = np.meshgrid(x, y, z, sparse=False)
+
+    m = np.empty((nx*ny*nz,3))
+    m[:,0] = xx.reshape(-1)
+    m[:,1] = yy.reshape(-1)
+    m[:,2] = zz.reshape(-1)
+
+    v = f(m).reshape(nx,ny,nz)
+
+    verts, faces, _, _ = measure.marching_cubes(v, level)
     return verts, faces
 
 def _marching_cubes(volume, level=0):
