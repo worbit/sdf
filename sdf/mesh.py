@@ -15,7 +15,7 @@ BATCH_SIZE = 32
 
 # wip, doesn't work yet
 def mc_original(f, level=0):
-    nx,ny,nz = 50,50,50
+    nx,ny,nz = 100,100,100
     xi,xa = -1,1
     yi,ya = -1,1
     zi,za = -1,1
