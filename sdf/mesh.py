@@ -13,16 +13,17 @@ WORKERS = multiprocessing.cpu_count()
 SAMPLES = 2 ** 22
 BATCH_SIZE = 32
 
-# wip, doesn't work yet
-def mc_original(f, level=0):
-    nx,ny,nz = 100,100,100
-    xi,xa = -1,1
-    yi,ya = -1,1
-    zi,za = -1,1
+# wip, starts coming to life slowly
+def mc_original(f, level=0, bounds=((-1,-1,-1),(1,1,1)), res=(100,100,100)):
+    (x0, y0, z0), (x1, y1, z1) = bounds
+    try:
+        nx,ny,nz = res
+    except TypeError:
+        nx = ny = nz = res
 
-    x = np.linspace(xi,xa,nx)
-    y = np.linspace(yi,ya,ny)
-    z = np.linspace(zi,za,nz)
+    x = np.linspace(x0,x1,nx)
+    y = np.linspace(y0,y1,ny)
+    z = np.linspace(z0,z1,nz)
 
     xx,yy,zz = np.meshgrid(x, y, z, sparse=False)
 
